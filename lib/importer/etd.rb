@@ -50,7 +50,7 @@ class Importer::ETD
       end
 
       marc = if meta.empty?
-               puts "No metadata provided; fetching from Pegasus"
+               puts "No metadata provided; fetching from SRU"
                etds.map { |e| e[:xml] }.map do |x|
                  if x.nil?
                    $stderr.puts "Bad zipfile source: #{e}"

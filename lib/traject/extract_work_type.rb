@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ExtractWorkType
-  # Transfor leader field 006 into a LOC Resource Type URI
+  # Transfer leader field 006 into a LOC Resource Type URI
   def extract_work_type
     work_type = {
       "a" => RDF::URI("http://id.loc.gov/vocabulary/resourceTypes/txt"),
@@ -19,7 +19,10 @@ module ExtractWorkType
       "p" => RDF::URI("http://id.loc.gov/vocabulary/resourceTypes/mix"),
     }
     lambda do |record, accumulator|
-      accumulator << work_type[record.leader.slice(6)]
+      # example:
+      #   LEADER njm a2200373 i 4500
+      # we want "j" from that leader field
+      accumulator << work_type[record.leader.slice(1)]
     end
   end
 end
